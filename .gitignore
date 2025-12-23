@@ -5,6 +5,7 @@ node_modules/
 .env
 
 # Database
+data/
 uploads.db
 uploads.db-journal
 

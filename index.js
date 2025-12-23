@@ -14,7 +14,11 @@ const PORT = process.env.PORT || 3000;
 const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
 
 // Setup DB
-const db = new sqlite3('uploads.db');
+const dataDir = 'data';
+fsExtra.ensureDirSync(dataDir);
+const dbPath = path.join(dataDir, 'uploads.db');
+
+const db = new sqlite3(dbPath);
 db.exec(`
     CREATE TABLE IF NOT EXISTS files (
         id TEXT PRIMARY KEY,
