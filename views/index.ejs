@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THROW - Temp File Upload</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo-box">
+            </> THROW
+        </div>
+    </header>
+
+    <main>
+        <div class="split-container">
+            <!-- Left Panel: Dropzone -->
+            <div class="left-panel">
+                <div id="dropzone" class="upload-zone">
+                    <div class="upload-icon">📂</div>
+                    <div id="fileLabel" class="upload-text">DRAG & DROP<br>OR CLICK TO BROWSE</div>
+                    <!-- Form is actually wrapping the right side, but input is associated via form attribute or JS? 
+                         Wait, the requirement says "options menu section" on right. 
+                         Usually the file input is part of the form. 
+                         I'll make the form wrap the *inputs* and handle the file input association carefully. 
+                         Actually, it's easier to have the form wrap everything or put the file input inside the form 
+                         and visually place it on the left using flexbox order or just simple structure. 
+                         
+                         Let's keep the <form> wrapping the specific inputs on the right, and the file input logic handled by JS appending to FormData.
+                         OR simpler: The <form> tag encloses both panels? No, that messes up layout sometimes.
+                         Let's make the form encompass the entire split-container content or just put the input inside the form and use the `form` attribute.
+                         HTML5 `form` attribute allows inputs outside the form tag.
+                         
+                         Let's put the <form id="uploadForm"> around the split container content?
+                         That seems safest for layout.
+                    -->
+                    <input type="file" id="fileInput" name="file" required>
+                </div>
+            </div>
+
+            <!-- Right Panel: Options -->
+            <div class="right-panel">
+                <form id="uploadForm" class="options-card">
+                    <div class="form-group">
+                        <label for="fileName">FILE NAME (REQUIRED)</label>
+                        <input type="text" id="fileName" name="fileName" class="neo-input" placeholder="e.g. secret_plans.pdf" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="uploaderName">UPLOADER NAME (REQUIRED)</label>
+                        <input type="text" id="uploaderName" name="uploaderName" class="neo-input" placeholder="YOUR NAME" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">PASSWORD (OPTIONAL)</label>
+                        <input type="password" id="password" name="password" class="neo-input" placeholder="LEAVE EMPTY FOR NONE">
+                    </div>
+
+                    <div class="form-group range-wrap">
+                        <label for="expiryHours">EXPIRY: <span id="expiryValue">24</span> HOURS</label>
+                        <input type="range" id="expiryHours" name="expiryHours" min="0" max="48" value="24" class="neo-input" oninput="document.getElementById('expiryValue').innerText = this.value">
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div id="progressContainer" style="display: none; margin-bottom: 15px;">
+                        <div style="font-weight: bold; margin-bottom: 5px; display: flex; justify-content: space-between;">
+                            <span>UPLOADING...</span>
+                            <span id="progressText">0%</span>
+                        </div>
+                        <div style="width: 100%; border: 3px solid black; height: 25px; background: white;">
+                            <div id="progressBar" style="width: 0%; height: 100%; background-color: var(--accent-pink);"></div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="neo-btn" style="width: 100%">GENERATE LINK</button>
+                    
+                    <div id="resultArea" class="result-area">
+                        <strong>SHARE THIS LINK:</strong>
+                        <a href="#" id="resultLink" class="result-link" target="_blank"></a>
+                        <small>(Click link to copy)</small>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; <%= new Date().getFullYear() %> THROW FILE SHARE. NO LOGS. AUTO-DELETE.
+    </footer>
+
+    <!-- Custom Modal -->
+    <div id="customModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <span id="modalTitle">MESSAGE</span>
+                <button id="modalClose" class="modal-close-btn">X</button>
+            </div>
+            <div class="modal-body">
+                <p id="modalMessage"></p>
+                <button id="modalOk" class="neo-btn" style="width: 100%; margin-top: 15px;">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>

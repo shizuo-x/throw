@@ -1,0 +1,259 @@
+:root {
+    --bg-color: #f3f0e3; /* Light cream/beige from the main area */
+    --primary-color: #979aff; /* Muted green from sidebar */
+    --accent-yellow: #ffde68; /* Yellow from profile card */
+    --accent-pink: #aaffd2; /* Pink from stats card - approximated */
+    --card-bg: #ffffff;
+    --text-color: #000000;
+    --border-width: 3px;
+    --shadow-offset: 4px;
+    --font-family: 'Courier New', Courier, monospace; /* Monospace for that raw feel */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Utilities */
+.neo-box {
+    background-color: var(--card-bg);
+    border: var(--border-width) solid var(--text-color);
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--text-color);
+}
+
+.neo-btn {
+    background-color: var(--accent-yellow);
+    border: var(--border-width) solid var(--text-color);
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--text-color);
+    color: var(--text-color);
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.1s;
+    text-transform: uppercase;
+}
+
+.neo-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px 0px var(--text-color);
+}
+
+.neo-input {
+    width: 100%;
+    padding: 10px;
+    border: var(--border-width) solid var(--text-color);
+    margin-bottom: 15px;
+    font-family: inherit;
+    background: #fff;
+    outline: none;
+}
+
+.neo-input:focus {
+    background-color: #f0f0f0;
+}
+
+/* Layout */
+header {
+    background-color: var(--primary-color);
+    padding: 15px 20px;
+    border-bottom: var(--border-width) solid var(--text-color);
+    display: flex;
+    align-items: center;
+}
+
+.logo-box {
+    background-color: var(--card-bg);
+    border: var(--border-width) solid var(--text-color);
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    box-shadow: 2px 2px 0px 0px var(--text-color);
+}
+
+main {
+    flex: 1;
+    display: flex;
+    padding: 40px;
+    gap: 40px;
+    background-color: var(--bg-color);
+    overflow: hidden; /* For split view */
+}
+
+.split-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    gap: 40px;
+}
+
+.left-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.right-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Upload Zone */
+.upload-zone {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--accent-yellow);
+    border: var(--border-width) solid var(--text-color);
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--text-color);
+    cursor: pointer;
+    transition: background-color 0.2s;
+    position: relative;
+    overflow: hidden; /* Prevent spillover */
+    min-width: 0; /* Flexbox safety */
+}
+
+.upload-zone.dragover {
+    background-color: #eec22e; /* Darker yellow */
+}
+
+.upload-zone input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.upload-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.upload-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    max-width: 90%;
+    word-break: break-word; /* Handle long words nicely */
+    line-height: 1.4;
+}
+
+/* Options Form */
+.options-card {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border: var(--border-width) solid var(--text-color);
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--text-color);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.range-wrap {
+    margin-bottom: 15px;
+}
+
+/* Footer */
+footer {
+    background-color: var(--primary-color);
+    border-top: var(--border-width) solid var(--text-color);
+    padding: 10px;
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+/* Response/Result Modal or Area */
+.result-area {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: var(--accent-pink);
+    border: var(--border-width) solid var(--text-color);
+    display: none; /* Hidden by default */
+}
+
+.result-link {
+    word-break: break-all;
+    background: white;
+    padding: 5px;
+    border: 2px solid black;
+    margin-top: 5px;
+    display: block;
+    cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .split-container {
+        flex-direction: column;
+        overflow-y: auto;
+    }
+    
+    main {
+        padding: 20px;
+        overflow-y: auto;
+    }
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-box {
+    background-color: var(--card-bg);
+    border: var(--border-width) solid var(--text-color);
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--text-color);
+    width: 100%;
+    max-width: 400px;
+}
+
+.modal-header {
+    background-color: var(--primary-color);
+    padding: 10px;
+    border-bottom: var(--border-width) solid var(--text-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.modal-close-btn {
+    background: none;
+    border: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 20px;
+    text-align: center;
+}

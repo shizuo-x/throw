@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download - THROW</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo-box">
+            </> THROW
+        </div>
+    </header>
+
+    <main style="align-items: center; justify-content: center;">
+        <div class="options-card" style="max-width: 500px; width: 100%;">
+            <h2>FILE READY</h2>
+            
+            <div class="neo-box" style="padding: 15px; margin-bottom: 20px;">
+                <p><strong>FILE:</strong> <%= file.originalName %></p>
+                <p><strong>UPLOADED BY:</strong> <%= file.uploaderName %></p>
+                <p><strong>EXPIRES IN:</strong> <%= timeRemaining %></p>
+            </div>
+
+            <% if (file.hasPassword) { %>
+                <form action="/file/<%= file.id %>/download" method="POST">
+                    <div class="form-group">
+                        <label for="password">ENTER PASSWORD TO DOWNLOAD</label>
+                        <input type="password" name="password" id="password" class="neo-input" required>
+                    </div>
+                    <% if (error) { %>
+                        <div style="color: red; font-weight: bold; margin-bottom: 10px;">
+                            <%= error %>
+                        </div>
+                    <% } %>
+                    <button type="submit" class="neo-btn" style="width: 100%">UNLOCK & DOWNLOAD</button>
+                </form>
+            <% } else { %>
+                <form action="/file/<%= file.id %>/download" method="POST">
+                    <button type="submit" class="neo-btn" style="width: 100%">DOWNLOAD FILE</button>
+                </form>
+            <% } %>
+        </div>
+    </main>
+
+    <footer>
+        &copy; <%= new Date().getFullYear() %> THROW FILE SHARE
+    </footer>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "name": "throw",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "better-sqlite3": "^12.5.0",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.2.1",
+    "fs-extra": "^11.3.3",
+    "multer": "^2.0.2",
+    "node-cron": "^4.2.1",
+    "uuid": "^9.0.1"
+  }
+}
