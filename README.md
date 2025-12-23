@@ -20,7 +20,7 @@ A simple, self-hosted temporary file sharing application. Securely upload files 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/throw.git
+git clone https://github.com/shizuo-x/throw.git
 cd throw
 ```
 
