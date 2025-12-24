@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - THROW</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .pixel-face {
+            width: 120px;
+            height: 120px;
+            background-color: var(--accent-pink);
+            border: var(--border-width) solid var(--text-color);
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--text-color);
+            margin: 0 auto 30px auto;
+            position: relative;
+        }
+
+        .eye {
+            width: 20px;
+            height: 20px;
+            background-color: var(--text-color);
+            position: absolute;
+            top: 30px;
+        }
+
+        .eye.left { left: 25px; }
+        .eye.right { right: 25px; }
+
+        .mouth {
+            width: 60px;
+            height: 10px;
+            background-color: var(--text-color);
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+        }
+
+        .tear {
+            width: 10px;
+            height: 10px;
+            background-color: #0000ff; /* Blue tear */
+            position: absolute;
+            top: 60px;
+            left: 30px;
+            box-shadow: 10px 10px 0 0 #0000ff; /* Pixelated drop */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-box">
+            </> THROW
+        </div>
+    </header>
+
+    <main style="align-items: center; justify-content: center;">
+        <div class="options-card" style="max-width: 500px; width: 100%; text-align: center;">
+            <div class="pixel-face">
+                <div class="eye left"></div>
+                <div class="eye right"></div>
+                <div class="tear"></div>
+                <div class="mouth"></div>
+            </div>
+            
+            <h1 style="text-transform: uppercase; font-size: 2rem; margin-bottom: 10px;">Too Late!</h1>
+            
+            <div class="neo-box" style="padding: 15px; margin-bottom: 20px; background-color: #fff;">
+                <p style="font-size: 1.1rem; font-weight: bold;">
+                    THIS FILE HAS BEEN DELETED OR NEVER EXISTED.
+                </p>
+                <p>We don't keep logs. Once it's gone, it's really gone.</p>
+            </div>
+
+            <a href="/" class="neo-btn" style="text-decoration: none; display: inline-block;">UPLOAD SOMETHING NEW</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; <%= new Date().getFullYear() %> THROW FILE SHARE. NO LOGS. AUTO-DELETE.
+    </footer>
+</body>
+</html>

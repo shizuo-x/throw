@@ -157,12 +157,12 @@ app.get('/file/:id', (req, res) => {
     const file = stmt.get(id);
 
     if (!file) {
-        return res.status(404).send('File not found or expired.');
+        return res.status(404).render('404');
     }
 
     if (Date.now() > file.expiryTime) {
         // Double check expiry (cleanup job might not have run yet)
-        return res.status(404).send('File has expired.');
+        return res.status(404).render('404');
     }
 
     // Calc remaining time
@@ -192,11 +192,11 @@ app.post('/file/:id/download', async (req, res) => {
     const file = stmt.get(id);
 
     if (!file) {
-        return res.status(404).send('File not found.');
+        return res.status(404).render('404');
     }
 
     if (Date.now() > file.expiryTime) {
-        return res.status(404).send('File has expired.');
+        return res.status(404).render('404');
     }
 
     if (file.passwordHash) {
